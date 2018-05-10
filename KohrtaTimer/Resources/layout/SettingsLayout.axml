@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/title1"
+        android:text="Time on (sec)"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp" />
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+        <Button
+            android:text="+"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/increaseTimeOnButton"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true" />
+        <EditText
+            android:inputType="number"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:id="@+id/timeOnEditText"
+            android:background="@android:color/white"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+        <Button
+            android:text="-"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/decreaseTimeOnButton"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/title2"
+        android:text="Time off (sec)"
+        android:layout_height="19.5dp"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp" />
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+        <Button
+            android:text="+"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/increaseTimeOffButton"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true" />
+        <EditText
+            android:inputType="number"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:id="@+id/timeOffEditText"
+            android:background="@android:color/white"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+        <Button
+            android:text="-"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/decreaseTimeOffButton"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/title3"
+        android:text="Rounds"
+        android:layout_height="19.5dp"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp" />
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+        <Button
+            android:text="+"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/increaseRoundsButton"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true" />
+        <EditText
+            android:inputType="number"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:id="@+id/roundsTextView"
+            android:background="@android:color/white"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+        <Button
+            android:text="-"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/decreaseRoundsButton"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <TextView
+        android:text="Total time:"
+        android:id="@+id/totalTimeTextView"
+        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp" />
+    <Button
+        android:text="Start"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/startButton"
+        android:layout_marginTop="20dp" />
+</LinearLayout>
