@@ -80,6 +80,9 @@ namespace KohrtaTimer
 			// aapt resource value: 0x7f050011
 			public const int startTimerButton = 2131034129;
 			
+			// aapt resource value: 0x7f050014
+			public const int stepsCounted = 2131034132;
+			
 			// aapt resource value: 0x7f050012
 			public const int stopTimerButton = 2131034130;
 			

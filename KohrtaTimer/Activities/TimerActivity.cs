@@ -7,6 +7,7 @@ using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
+using Android.Hardware;
 using Android.Media;
 using Android.OS;
 using Android.Runtime;
@@ -18,9 +19,9 @@ using Kohorta_StandardCore.Model;
 namespace KohrtaTimer
 {
     [Activity(Label = "Timer")]
-    public class TimerActivity : Activity
+    public class TimerActivity : Activity, ISensorEventListener
     {
-        Thread muzaThread;
+      //  Thread muzaThread;
 
         MediaPlayer player;
         Button StartPauseBtn;
@@ -29,6 +30,12 @@ namespace KohrtaTimer
         TextView mainTextView;
         TextView secondsElapsedTextView;
         TextView roundsRemainedTextView;
+        TextView debugTextView;
+        TextView countedSteps;
+
+        //stepCounter
+        SensorManager sensorManager;
+        Boolean running = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -52,17 +59,22 @@ namespace KohrtaTimer
             TimerData._timer.Elapsed += TimerData.Tick;
             TimerData._timer.Elapsed += UpdateClock;
             TimerData._timer.Elapsed += CheckOnRest;
-            
+
+            sensorManager = (SensorManager)GetSystemService(Context.SensorService);
+
         }
 
         private void FindViews()
         {
+            countedSteps = FindViewById<TextView>(Resource.Id.stepsCounted);
             StartPauseBtn = FindViewById<Button>(Resource.Id.startTimerButton);
             StopBtn = FindViewById<Button>(Resource.Id.stopTimerButton);
             BackBtn = FindViewById<Button>(Resource.Id.backButton);
             mainTextView = FindViewById<TextView>(Resource.Id.mainTextView);
             secondsElapsedTextView = FindViewById<TextView>(Resource.Id.timeElapsedTextView);
             roundsRemainedTextView = FindViewById<TextView>(Resource.Id.roundsElapsedTextView);
+
+           
         }
 
         private void HandleEvents()
@@ -94,8 +106,8 @@ namespace KohrtaTimer
             {   
                 if(mainTextView.Text!="Go!")
                 {
-                    muzaThread = new Thread(new ParameterizedThreadStart(PlaySound));
-                    muzaThread.Start(Resource.Raw.GOGOGO);
+                 //   muzaThread = new Thread(new ParameterizedThreadStart(PlaySound));
+                 //   muzaThread.Start(Resource.Raw.GOGOGO);
 
                     secondsElapsedTextView.SetBackgroundColor(Android.Graphics.Color.ForestGreen);
                     mainTextView.Text = "Go!";
@@ -108,8 +120,8 @@ namespace KohrtaTimer
             {
                 if(mainTextView.Text!="Stop!")
                 {
-                    muzaThread = new Thread(new ParameterizedThreadStart(PlaySound));
-                    muzaThread.Start(Resource.Raw.STOP);
+                 //   muzaThread = new Thread(new ParameterizedThreadStart(PlaySound));
+                 //   muzaThread.Start(Resource.Raw.STOP);
 
                     secondsElapsedTextView.SetBackgroundColor(Android.Graphics.Color.Red);
                     mainTextView.Text = "Stop!";
@@ -167,14 +179,52 @@ namespace KohrtaTimer
             StartPauseBtn.Click -= pauseTicking;
         }
 
-        private  void PlaySound(object id)
-        {
-            player = MediaPlayer.Create(this, Int32.Parse(id.ToString()));
-            player.Start();
-            if( player.IsPlaying==false)
+        /*    private  void PlaySound(object id)
             {
-                muzaThread.Abort();
+                player = MediaPlayer.Create(this, Int32.Parse(id.ToString()));
+           //     player.Start();
+                if( player.IsPlaying==false)
+                {
+                    muzaThread.Abort();
+                }
             }
+            */
+
+            //Step counter methods
+        public void OnAccuracyChanged(Sensor sensor, [GeneratedEnum] SensorStatus accuracy)
+        {
+        }
+
+        public void OnSensorChanged(SensorEvent e)
+        {
+            if (running)
+            {
+                countedSteps.Text = e.Values[0].ToString();
+            }
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            running = true;
+            Sensor countSensor = sensorManager.GetDefaultSensor(SensorType.StepCounter);
+            if (countSensor != null)
+            {
+                sensorManager.RegisterListener(this, countSensor, SensorDelay.Ui);
+            }
+            else
+            {
+                Toast.MakeText(this, "Sensor not found", ToastLength.Short).Show();
+            }
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            base.OnPause();
+            running = false;
+            sensorManager.UnregisterListener(this);     //harware stop detecitng steps
+
         }
     }
 }

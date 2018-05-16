@@ -47,4 +47,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton" />
+  <TextView
+        android:id="@+id/stepsCounted"
+        android:text=""
+        android:textSize="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAlignment="4"
+        android:layout_marginTop="40dp" />
 </LinearLayout>
